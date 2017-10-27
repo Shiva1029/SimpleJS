@@ -1,0 +1,2 @@
+# SimpleJS
+Lightweight JS library

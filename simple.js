@@ -85,6 +85,42 @@ function get(url, sucessCallback, errorCallback) {
     xhr.send(null);
 }
 
+function putJSON(data, url, successCallback, errorCallback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('PUT', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            if (successCallback) {
+                successCallback(xhr.response);
+            }
+        } else {
+            if (xhr.status !== 200 && errorCallback) {
+                errorCallback(xhr.status);
+            }
+        }
+    }
+    xhr.send(JSON.stringify(data));
+}
+
+function deleteJSON(data, url, successCallback, errorCallback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('DELETE', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            if (successCallback) {
+                successCallback(xhr.response);
+            }
+        } else {
+            if (xhr.status !== 200 && errorCallback) {
+                errorCallback(xhr.status);
+            }
+        }
+    }
+    xhr.send(JSON.stringify(data));
+}
+
 function setCookie(name, val, days) {
     var d = new Date();
     d.setTime(d.getTime() + (days*24*60*60*1000));
